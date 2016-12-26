@@ -41,6 +41,15 @@
 					{name: "Jane", phone:"99998886"}
 				];
 
+				$scope.operadoras=[
+					{nome: "Oi", codigo: 14, categoria: "Celular"},
+					{nome: "Vivo", codigo: 15, categoria: "Celular"},
+					{nome: "Tim", codigo: 41, categoria: "Celular"},
+					{nome: "GVT", codigo: 25, categoria: "Fixo"},
+					{nome: "Embratel", codigo: 21, categoria: "Fixo"}
+
+				];
+
 				$scope.addContact = function(contact){
 					$scope.contacts.push(contact);
 					delete $scope.contact;
@@ -60,16 +69,19 @@
 			<tr>
 				<th>Name</th>
 				<th>Phone</th>
+				<th>Operadora</th>
 			</tr>
 			<tr ng-repeat="contact in contacts">
 				<td>{{contact.name}}</td>
 				<td>{{contact.phone}}</td>
+				<td>{{contact.operadora.nome}}</td>
 			</tr>
 		</table>
 		<hr/>
 		<input class="form-control" type="text" ng-model = "contact.name" placeholder="Name" />
 		<input class="form-control" type="text" ng-model = "contact.phone" placeholder="Phone" />
-		<button class="btn btn-primary btn-block" ng-click="addContact(contact)" > Add Contact</button>
+		<select class="form-control" ng-model="contact.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras"><option value="">Selecione uma operadora</option></select>
+		<button class="btn btn-primary btn-block" ng-click="addContact(contact)" ng-disabled="!contact.name || !contact.phone"> Add Contact</button>
 	</div>
 </body>
 </html>
